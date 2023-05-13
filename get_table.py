@@ -20,4 +20,9 @@ df['team_h'] = df['team_h'].map(id_dict)
 df['kickoff_time'] = pd.to_datetime(df['kickoff_time']).dt.strftime("%Y-%m-%d %H:%M:%S")
 
 df = df[['kickoff_time','team_a','team_a_score','team_h','team_h_score']].T
-df.to_json("C:\\Users\\sebas\\OneDrive\\premierleaguepage\\bassen229.github.io\\fixtures.json",orient='records')
+# Convert the DataFrame to a JSON object
+json_obj = df.to_json(orient='records')
+
+# Save the JSON object to a file
+with open('C:\\Users\\sebas\\OneDrive\\premierleaguepage\\bassen229.github.io\\fixtures.json', 'w') as f:
+    f.write(json_obj)
