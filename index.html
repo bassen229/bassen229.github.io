@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fixtures Table</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  </head>
-  <body>
-    <table id="fixtures-table">
-      <thead>
-        <tr>
-          <th>Kickoff</th>
-          <th>Home Team</th>
-          <th>Away Team</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    <script>
-      $(document).ready(function() {
-        $.getJSON("fixtures.json", function(data) {
-          $.each(data.fixtures, function(key, value) {
-            var row = $("<tr>");
-            var kickoff = $("<td>").text(value.kickoff_time);
-            var homeTeam = $("<td>").text(value.team_h);
-            var awayTeam = $("<td>").text(value.team_a);
-            var score = $("<td>").text(value.score);
-            row.append(kickoff, homeTeam, awayTeam, score);
-            $("#fixtures-table tbody").append(row);
-          });
-        });
-      });
-    </script>
-  </body>
+<head>
+	<title>Fixtures</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.getJSON("C:\\Users\\sebas\\OneDrive\\premierleaguepage\\bassen229.github.io\\fixtures.json", function(data) {
+				var table = $("<table>");
+				var headerRow = $("<tr>");
+				$.each(data[0], function(key, value) {
+					headerRow.append($("<th>").text(key));
+				});
+				table.append(headerRow);
+				$.each(data, function(index, row) {
+					var tableRow = $("<tr>");
+					$.each(row, function(key, value) {
+						tableRow.append($("<td>").text(value));
+					});
+					table.append(tableRow);
+				});
+				$("#fixtures-table").append(table);
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Fixtures</h1>
+	<div id="fixtures-table"></div>
+</body>
 </html>
